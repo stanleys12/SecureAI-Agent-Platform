@@ -1,0 +1,20 @@
+{
+  "http_request": {
+    "action": "allow",
+    "allowed_domains": [
+      "api.weather.com",
+      "jsonplaceholder.typicode.com"
+    ],
+    "methods": [
+      "GET"
+    ]
+  },
+  "db_query": {
+    "action": "allow",
+    "read_only": true
+  },
+  "file_reader": {
+    "action": "deny",
+    "reason": "Disabled by default to prevent LFI attacks"
+  }
+}

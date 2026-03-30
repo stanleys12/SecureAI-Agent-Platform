@@ -42,10 +42,15 @@ class DummyLLMAgent:
         if tool_name not in self.tools:
             return f"[Agent Error] Attempted to use non-existent tool '{tool_name}'."
 
-        # Execute Tool
+        # Obtain the tool
         tool = self.tools[tool_name]
+        
+        # Phase 4 Sandbox Interception
+        from sandbox.executor import SecureToolExecutor
+        executor = SecureToolExecutor()
+        
         try:
-            result = tool.execute(**tool_args)
+            result = executor.execute_safely(tool, **tool_args)
             print(f"[Agent] Tool returned: {result}")
             return f"Success! Tool Result: {result}"
         except Exception as e:
